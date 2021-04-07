@@ -8,22 +8,19 @@ public class TestSpring {
                 "applicationContext.xml"
         );
 
-        ClassicalMusic classicalMusic = context.getBean("musicBean", ClassicalMusic.class);
+//        Music music = context.getBean("musicBean", Music.class);
 
-        System.out.println(classicalMusic.getSong());
+        // в классе RockMusic убрали из аннотации @Component("musicBean") название и он теперь называется
+        // по имени класса с мал буквы
+        Music music = context.getBean("rockMusic", Music.class);
 
-//        // DI через конструктор
-//        // Music music = context.getBean("musicBean", Music.class);
-//        // MusicPlayer musicPlayer = new MusicPlayer(music);
-//
-//        // DI через сеттер
-//        MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
-//
-////        musicPlayer.playMusic();
-//
-//        musicPlayer.playMusicList();
-//        System.out.println(musicPlayer.getName());
-//        System.out.println(musicPlayer.getVolume());
+        MusicPlayer musicPlayer = new MusicPlayer(music);
+
+        musicPlayer.playMusic();
+
+        Music music2 = context.getBean("classicalMusic", Music.class);
+        MusicPlayer classicalMusicPlayer = new MusicPlayer(music2);
+        classicalMusicPlayer.playMusic();
 
         context.close();
     }

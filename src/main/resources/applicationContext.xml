@@ -5,48 +5,8 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!-- подключили musicPlayer.properties, где указали name и volume -->
-    <context:property-placeholder location="classpath:musicPlayer.properties"/>
 
-    <bean id="musicBean"
-          class="ua.wetal.springcourse.ClassicalMusic"
-          init-method="doMyInit"
-          destroy-method="doMyDestroy"
-          factory-method="getClassicalMusic">
-    </bean>
+    <context:component-scan base-package="ua.wetal.springcourse"/>
 
-    <!--&lt;!&ndash; ДЗ использ 3 жанра&ndash;&gt;-->
-    <!--<bean id="musicBean1"-->
-    <!--class="ua.wetal.springcourse.ClassicalMusic">-->
-    <!--</bean>-->
-
-    <!--<bean id="musicBean2"-->
-    <!--class="ua.wetal.springcourse.RockMusic">-->
-    <!--</bean>-->
-
-    <!--<bean id="musicBean3"-->
-    <!--class="ua.wetal.springcourse.JazzMusic">-->
-    <!--</bean>-->
-
-    <!--<bean id="musicPlayer"-->
-    <!--class="ua.wetal.springcourse.MusicPlayer">-->
-    <!--&lt;!&ndash; заменили из-за ДЗ&ndash;&gt;-->
-    <!--&lt;!&ndash;<property name="music" ref="musicBean" />&ndash;&gt;-->
-    <!--<property name="musicList">-->
-    <!--<list>-->
-    <!--<ref bean="musicBean1"/>-->
-    <!--<ref bean="musicBean2"/>-->
-    <!--<ref bean="musicBean3"/>-->
-    <!--</list>-->
-    <!--</property>-->
-
-    <!--&lt;!&ndash; вручную задаем значения полей &ndash;&gt;-->
-    <!--&lt;!&ndash;<property name="name" value="Some name" />&ndash;&gt;-->
-    <!--&lt;!&ndash;<property name="volume" value="50" />&ndash;&gt;-->
-
-    <!--&lt;!&ndash; после подключения musicPlayer.properties читаем значения полей из этого файла&ndash;&gt;-->
-    <!--<property name="name" value="${musicPlayer.name}" />-->
-    <!--<property name="volume" value="${musicPlayer.volume}" />-->
-    <!--</bean>-->
 
 </beans>
