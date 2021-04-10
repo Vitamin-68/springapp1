@@ -5,13 +5,18 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Component("musicBean")
-// если бину не задавать ID явно в аннотации, то у бина будет ID равен имени класса с маленькой буквы
 @Component
 public class RockMusic implements Music {
-    List<String> playList = new ArrayList<>();
+    private List<String> playList = new ArrayList<>();
+    {
+        playList.add("Wind cries Mary");
+        playList.add("Dancing in the Dark");
+        playList.add("Tear in My Heart");
+    }
+
+
     @Override
-    public String getSong() {
-        return "Wind cries Mary";
+    public List<String> getSong() {
+        return playList;
     }
 }
