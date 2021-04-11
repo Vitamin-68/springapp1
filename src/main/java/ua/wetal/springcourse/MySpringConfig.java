@@ -4,6 +4,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.Scope;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 // этот класс используется вместо XML конфига
 @Configuration
@@ -25,13 +31,27 @@ public class MySpringConfig {
     }
 
     @Bean
-    public MusicPlayer musicPlayer(){
-        return new MusicPlayer(rockMusic(), classicalMusic());
+    public JazzMusic jazzMusic() {
+        return new JazzMusic();
     }
 
     @Bean
-    public Computer computer() {
-        return new Computer(musicPlayer());
+    public MusicPlayer musicPlayer(){
+        return new MusicPlayer(listGenre());
     }
+    @Bean
+    public List<Music> listGenre() {
+        List<Music> listMusic = new ArrayList<>();
+        listMusic.add(classicalMusic());
+        listMusic.add(rockMusic());
+        listMusic.add(jazzMusic());
+        return listMusic;
+//        return Arrays.asList(classicalMusic(), rockMusic(), jazzMusic());
+    }
+
+//    @Bean
+//    public Computer computer() {
+//        return new Computer(musicPlayer());
+//    }
 }
 
