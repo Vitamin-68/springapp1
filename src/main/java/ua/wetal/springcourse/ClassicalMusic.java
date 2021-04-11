@@ -1,22 +1,26 @@
 package ua.wetal.springcourse;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 @Component
 public class ClassicalMusic implements Music {
-    private List<String> playList = new ArrayList<>();
-    {
-        playList.add("Hungarian Rhapsody");
-        playList.add("Symphony No 5");
-        playList.add("The four season");
+
+    @PostConstruct
+    public void doMyInit() {
+        System.out.println("Doing my initialization");
     }
 
+    @PreDestroy
+    public void doMyDestroy() {
+        System.out.println("Doing my destruction");
+    }
 
     @Override
-    public List<String> getSong() {
-        return playList;
+    public String getSong() {
+        return "Hungarian Rhapsody";
     }
 }

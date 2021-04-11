@@ -2,48 +2,40 @@ package ua.wetal.springcourse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Random;
 
 @Component
 public class MusicPlayer {
-//    @Autowired
-//    @Qualifier("classicalMusic")
-//    private Music music;
 
+    @Value("${musicPlayer.name}")
+    private String name;
 
-    private ClassicalMusic classicalMusic;
-    private RockMusic rockMusic;
+    @Value("${musicPlayer.volume}")
+    private int volume;
 
-    @Autowired
-    public MusicPlayer(ClassicalMusic classicalMusic, RockMusic rockMusic) {
-        this.classicalMusic = classicalMusic;
-        this.rockMusic = rockMusic;
+    public String getName() {
+        return name;
     }
 
-// 3. ID через поле
-//    @Autowired
-//    private Music music;
+    public int getVolume() {
+        return volume;
+    }
 
-    // 1. Внедрение зависимости (ID) через конструктор:
-//    @Autowired
-//    public MusicPlayer(Music music) {
-//        this.music = music;
-//    }
+    private Music music1;
+    private Music music2;
 
-    // 2. ID через сеттер (название метода вообще может быть любым!):
-//    @Autowired
-//    public void setMusic(Music music) {
-//        this.music = music;
-//    }
+    @Autowired
+    public MusicPlayer(@Qualifier("rockMusic") Music music1,
+                       @Qualifier("classicalMusic") Music music2) {
+        this.music1 = music1;
+        this.music2 = music2;
+    }
 
-    public void playMusic(MusicGenre musicGenre) {
-        final Random random = new Random();
-        if (musicGenre == MusicGenre.CLASSICAL) {
-            System.out.println(classicalMusic.getSong().get(random.nextInt(3)));
-        } else {
-            System.out.println(rockMusic.getSong().get(random.nextInt(3)));
-        }
+
+    public String playMusic() {
+        return "Playing " + music1.getSong() + ", " + music2.getSong();
     }
 }
